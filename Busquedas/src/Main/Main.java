@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.mostrar();
+        //este es el menu
     }
 
 }
