@@ -1,6 +1,7 @@
-package Main;
+﻿package Main;
 
 /**
+ * Clase que se encarga de ejecutar Menu
  *
  * @author Juan Miguel Arias Mejias
  * @author Ana Teresa Quesada Ramírez
