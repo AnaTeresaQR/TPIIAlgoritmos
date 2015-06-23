@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 public class Board extends JPanel {
 
     Dibujar dibujar;
+    int[] vector = {27, 14, 8, 19, 10, 17, 12, 11, 22, 24};
 
     public Board() {
         dibujar = new Dibujar();
@@ -15,11 +16,7 @@ public class Board extends JPanel {
     @Override
     public void paint(Graphics g) {
         this.paintComponent(g);
-        int num = 1;
-        for (int i = 0; i < 10; i++) {
-            dibujar.dibujarBolita(g, num, (i * 50), 30);
-            num += 3;
-        }
+        dibujar.dibujarVector(g, vector, 4);
     }
 
     public void update() {
