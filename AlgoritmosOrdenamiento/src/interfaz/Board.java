@@ -15,6 +15,9 @@ public class Board extends JPanel {
 
     Dibujar dibujar; // llama a la clase que se encarga de Dibujar los elementos para explicación
     int[] vector = {27, 14, 8, 19, 10, 17, 12, 11, 22, 24}; // vector que se va a ser ordenado
+    int[] vector2 = {27, 14, 8, 19, 10, 17, 7};
+    int[] vector3 = {27, 14, 8, 19, 10};
+    int[] vector4 = {27, 14, 8, 19};
 
     public Board() {
         dibujar = new Dibujar();
@@ -26,7 +29,10 @@ public class Board extends JPanel {
     @Override
     public void paint(Graphics g) {
         this.paintComponent(g);
-        dibujar.dibujarVector(g, vector, 4);
+        dibujar.dibujarVector(g, vector, new int[]{7, 2, 5}, Dibujar.PRIMERA_LINEA);
+        dibujar.dibujarVector(g, vector2, new int[]{7, 2, 5}, Dibujar.SEGUNDA_LINEA);
+        dibujar.dibujarVector(g, vector3, new int[]{7, 2, 5}, Dibujar.TERCERA_LINEA);
+        dibujar.dibujarVector(g, vector4, new int[]{7, 2, 5}, Dibujar.CUARTA_LINEA);
     }
 
     /**
@@ -41,7 +47,7 @@ public class Board extends JPanel {
         Board b = new Board();
         frame.add(b);
         frame.setVisible(true);
-        frame.setSize(550, 200);
+        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
     }
