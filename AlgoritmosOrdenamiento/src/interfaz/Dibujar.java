@@ -40,7 +40,7 @@ public class Dibujar {
 
     /**
      * Se encarga de pintar un círculo que contendrá vectores, y validar si
-     * deben resaltarse o no
+     * deben resaltarse o no y modificar color
      *
      * @param g componente para pintar
      * @param numero numero a insertar en el círculo
@@ -76,7 +76,7 @@ public class Dibujar {
     /**
      * Se encarga de mandarle los datos necesarios a dibujarCirculo para pintar
      * los círculos y los numeros correspondientes a cada uno y además decidir
-     * si deben pintarse o no de otro color
+     * si deben pintarse o no de otro color y la ubicación del vector
      *
      * @param g componente para pintar
      * @param numeros recibe un vector de numeros para pintar en los círculos
@@ -101,14 +101,13 @@ public class Dibujar {
             }
             dibujarCirculo(g, numero, i * 50 + 40, linea, resaltado);
             dibujarIndices(g, i, i * 50 + 40, linea);
-//            dibujarCirc(g, i * 50 + 50);
+            dibujarCirc(g, i * 50 + 50);
         }
     }
 
     /**
      * Se encarga de mandarle los datos necesarios a dibujarCirculo para pintar
-     * los círculos y los numeros correspondientes a cada uno y además decidir
-     * si deben pintarse o no de otro color
+     * los círculos y los numeros correspondientes a cada uno
      *
      * @param g componente para pintar
      * @param numeros recibe un vector de numeros para pintar en los círculos
@@ -124,6 +123,14 @@ public class Dibujar {
         }
     }
 
+    public void dibujarVectorBandera(Graphics g, int[] numeros, int linea) {
+        
+    }
+    
+    public void identificarLinea() {
+        
+    }
+
     /**
      * Se encarga de dibujar los índices de los círculos
      *
@@ -136,12 +143,30 @@ public class Dibujar {
         g.drawString(String.valueOf(num), x + 16, y + 53);
     }
 
-//    public void dibujarCirc(Graphics g, int x) {
-//        // entre linea uno y dos
-//        g.drawOval(x, (PRIMERA_LINEA + SEGUNDA_LINEA) / 2, 40, 40);
-//        // entre linea dos y tres
-//        g.drawOval(x, (SEGUNDA_LINEA + TERCERA_LINEA) / 2, 40, 40);
-//        // entre tres y cuatro
-//        g.drawOval(x, (TERCERA_LINEA + CUARTA_LINEA) / 2, 40, 40);
-//    }
+    /**
+     * Se encarga de dibujar los índices de los círculos
+     *
+     * @param g componente para pintar
+     * @param num a graficar
+     * @param x coordenada de la x
+     * @param linea la ubicación en y para colocarse
+     */
+    public void dibujarBandera(Graphics g, int num, int x, int linea) {
+        g.drawString(String.valueOf(num), x + 16, linea);
+    }
+
+    public void dibujarCirc(Graphics g, int x) {
+        // entre linea cero y uno
+        int linea0_1 = (PRIMERA_LINEA ) / 2;
+        g.drawOval(x, linea0_1, 40, 40);
+        // entre linea uno y dos
+        int linea1_2 = (PRIMERA_LINEA + SEGUNDA_LINEA) / 2;
+        g.drawOval(x, linea1_2, 40, 40);
+        // entre linea dos y tres
+        int linea2_3 = (SEGUNDA_LINEA + TERCERA_LINEA) / 2;
+        g.drawOval(x, linea2_3, 40, 40);
+        // entre tres y cuatro
+        int linea3_4 = (TERCERA_LINEA + CUARTA_LINEA) / 2;
+        g.drawOval(x, linea3_4, 40, 40);
+    }
 }
