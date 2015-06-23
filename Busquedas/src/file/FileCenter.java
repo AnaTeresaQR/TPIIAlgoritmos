@@ -47,7 +47,7 @@ public class FileCenter {
      *
      * @return el vector de personas
      */
-    public Persona[] getVector() {
+    public Persona[] getArray() {
         return file.getArray();
     }
 
@@ -67,16 +67,6 @@ public class FileCenter {
      */
     public List<Persona> getList() {
         return file.getList();
-    }
-
-    /**
-     * Metodo que se encarga llamar al método de extraer de la lista las cédulas
-     * de las personas
-     *
-     * @return devuelve un vector de cédulas
-     */
-    public int[] getIDsArray() {
-        return file.getIDArray();
     }
 
 }

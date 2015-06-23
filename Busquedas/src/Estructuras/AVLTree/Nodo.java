@@ -1,5 +1,7 @@
 package Estructuras.AVLTree;
 
+import objetos.Persona;
+
 /**
  * Clase que se encarga de los datos correspondientes al nodo de un árbol
  *
@@ -8,12 +10,12 @@ package Estructuras.AVLTree;
  */
 public class Nodo {
 
-    private int dato; // dato del nodo
+    private Persona dato; // dato del nodo
     private Nodo izq; //  hijo izquierdo
     private Nodo der; // hijo derecho
     private int peso; // el peso del nodo
 
-    public Nodo(int dato, Nodo izq, Nodo der) {
+    public Nodo(Persona dato, Nodo izq, Nodo der) {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
@@ -26,15 +28,15 @@ public class Nodo {
      *
      * @param dato recibe el dato o valor del nodo
      */
-    public Nodo(int dato) {
+    public Nodo(Persona dato) {
         this(dato, null, null);
     }
 
-    public int getDato() {
+    public Persona getDato() {
         return dato;
     }
 
-    public void setDato(int dato) {
+    public void setDato(Persona dato) {
         this.dato = dato;
     }
 

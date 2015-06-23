@@ -1,7 +1,6 @@
 package busquedas;
 
 import file.FileCenter;
-import interfaces.TimeTester;
 import objetos.Persona;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -15,14 +14,15 @@ import java.util.Date;
  * @author Juan Miguel Arias Mejias
  * @author Ana Teresa Quesada Ramírez
  */
-public class BinaryVectorSearch implements TimeTester {
+public class BinaryVectorSearch {
 
     private FileCenter file; // clase que tiene los vectores y lista de personas
-    private int[] vector; // crea un vector
+    private Persona[] vector; // crea un vector
 
     public BinaryVectorSearch() {
         file = FileCenter.getInstance();
         vector = null;
+        insertAll(file.getArrayList());
     }
 
     /**
@@ -32,11 +32,11 @@ public class BinaryVectorSearch implements TimeTester {
      */
     public void insertAll(ArrayList<Persona> personas) {
 
-        vector = new int[personas.size()];
+        vector = new Persona[personas.size()];
 
         for (int i = 0; i < vector.length; i++) {
 
-            vector[i] = personas.remove(personas.size() - 1).getCedula();
+            vector[i] = personas.remove(personas.size() - 1);
         }
         Arrays.sort(vector);
     }
@@ -48,7 +48,7 @@ public class BinaryVectorSearch implements TimeTester {
      * @param intVector el vector en donde se realizara la busqueda
      * @return indice del valor encontrado en caso de no ser encontrado -1
      */
-    public int binarySearch(int searchItem, int[] intVector) {
+    public Persona binarySearch(int searchItem, Persona[] intVector) {
 
         //Creo un rango entre los 2 indices
         int startIndex = 0; // indice para empezar
@@ -57,10 +57,10 @@ public class BinaryVectorSearch implements TimeTester {
 
         while (startIndex <= endIndex) {
             currentItem = (startIndex + endIndex) / 2;
-            if (intVector[currentItem] == searchItem) {
-                return currentItem;
+            if (intVector[currentItem].getCedula() == searchItem) {
+                return intVector[currentItem];
             } else {
-                if (intVector[currentItem] < searchItem) {
+                if (intVector[currentItem].getCedula() < searchItem) {
                     startIndex = currentItem + 1;
                 } else {
                     endIndex = currentItem - 1;
@@ -68,28 +68,19 @@ public class BinaryVectorSearch implements TimeTester {
             }
 
         }
-        return -1;
+        return null;
     }
 
     /**
      * Método que se encarga de obtener el tiempo que duró en ejecutar una
      * búsqueda por cédula de una persona en el vector
      *
-     * @param cedula de la persona a buscar
+     * @param inicio es el inicio
+     * @param fin es el fin
      * @return el tiempo de duración
      * @throws java.io.FileNotFoundException si no se encuentra la cedula
      */
-    public long getMillisOperation(int cedula) throws FileNotFoundException {
-
-        insertAll(file.getArrayList());
-        long inicio = System.currentTimeMillis();
-        int result = binarySearch(cedula, vector);
-        long fin = System.currentTimeMillis();
-
-        // Si no se encuentra
-        if (result == -1) {
-            throw new FileNotFoundException("La cedula " + cedula + " no se encuentra");
-        }
+    public long getMillisOperation(long inicio, long fin) throws FileNotFoundException {
 
         return fin - inicio;
 
@@ -98,13 +89,12 @@ public class BinaryVectorSearch implements TimeTester {
     /**
      * Método que se encarga de darle formato al tiempo de duración del vector
      *
-     * @param cedula recibe la cédula a buscar
+     * @param time a dar formato
      * @return el formato en una hilera de lo que duró el árbol en buscar
      * @throws java.io.FileNotFoundException si no se encuentra la cedula
      */
-    public String getFormatTime(int cedula) throws FileNotFoundException {
+    public String getFormatTime(long time) throws FileNotFoundException {
 
-        long time = getMillisOperation(cedula);
         return (new SimpleDateFormat("mm:ss:SSS")).format(new Date(time));
     }
 
@@ -116,9 +106,20 @@ public class BinaryVectorSearch implements TimeTester {
      * @return la hilera de texto con la cédula y e formato de duración
      * @throws java.io.FileNotFoundException si no se encuentra la cedula
      */
-    @Override
     public String searchTime(int cedula) throws FileNotFoundException {
-        return "Cedula: " + cedula + "\nEl tiempo de busqueda fue: " + getFormatTime(cedula);
+
+        long inicio = System.currentTimeMillis();
+        System.out.println("Long de inicio: " + inicio);
+        Persona result = binarySearch(cedula, vector);
+        long fin = System.currentTimeMillis();
+        System.out.println("Long de fin: " + fin);
+
+        if (result == null) {
+
+            throw new FileNotFoundException("La cedula " + cedula + " no se encuentra");
+        }
+
+        return "Cedula: " + result.toString() + "\nEl tiempo de busqueda fue: " + getFormatTime(this.getMillisOperation(inicio, fin));
     }
 
     /**
@@ -141,8 +142,8 @@ public class BinaryVectorSearch implements TimeTester {
 
         try {
 
-            System.out.println(b.searchTime(900140896));
-            System.out.println(b.searchTime(111050060));
+            System.out.println(b.searchTime(701890319));
+            System.out.println(b.searchTime(107430035));
             // No existe
             System.out.println(b.searchTime(234234812));
 

@@ -20,7 +20,7 @@ public class LoadFile {
     public File getFile() {
         try {
             // Se obtiene del paquete
-            URL url = getClass().getResource("Listade1000 personas.txt");
+            URL url = getClass().getResource("Listade1000000personas.txt");
             // Se retorna
             return new File(url.toURI());
         } catch (URISyntaxException ex) {

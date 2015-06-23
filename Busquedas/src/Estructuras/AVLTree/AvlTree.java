@@ -1,5 +1,7 @@
 package Estructuras.AVLTree;
 
+import objetos.Persona;
+
 /**
  * Clase que se encarga de realizar las operaciones correspondientes a un árbol
  * AVL
@@ -23,7 +25,7 @@ public class AvlTree {
      * @param x valor a insertar
      * @throws Estructuras.AVLTree.TreeException si hay problemas al insertar
      */
-    public void insertar(int x) throws TreeException {
+    public void insertar(Persona x) throws TreeException {
         raiz = insertar(x, raiz);
     }
 
@@ -35,22 +37,22 @@ public class AvlTree {
      * @param raiz , nodo raíz del árbol
      * @return la nueva raíz
      */
-    private Nodo insertar(int x, Nodo raiz) throws TreeException {
+    private Nodo insertar(Persona x, Nodo raiz) throws TreeException {
         if (raiz == null) {
             raiz = new Nodo(x, null, null);
-        } else if (x < raiz.getDato()) {
+        } else if (x.getCedula() < raiz.getDato().getCedula()) {
             raiz.setIzq(insertar(x, raiz.getIzq()));
             if (peso(raiz.getIzq()) - peso(raiz.getDer()) == 2) { // si se cumple es porque está desbalanceado
-                if (x < raiz.getIzq().getDato()) {
+                if (x.getCedula() < raiz.getIzq().getDato().getCedula()) {
                     raiz = rotarConHijoIzquierdo(raiz);
                 } else {
                     raiz = dobleConHijoIzq(raiz);
                 }
             }
-        } else if (x > raiz.getDato()) {
+        } else if (x.getCedula() > raiz.getDato().getCedula()) {
             raiz.setDer(insertar(x, raiz.getDer()));
             if (peso(raiz.getDer()) - peso(raiz.getIzq()) == 2) {
-                if (x > raiz.getDer().getDato()) {
+                if (x.getCedula() > raiz.getDer().getDato().getCedula()) {
                     raiz = rotarConHijoDerecho(raiz);
                 } else {
                     raiz = dobleConHijoDer(raiz);
@@ -245,11 +247,11 @@ public class AvlTree {
      * @param raiz la raíz del árbol
      * @return el nodo buscado
      */
-    private int buscarNodo(int x, Nodo raiz) throws TreeException {
+    private Persona buscarNodo(int x, Nodo raiz) throws TreeException {
         while (raiz != null) {
-            if (x < raiz.getDato()) {
+            if (x < raiz.getDato().getCedula()) {
                 raiz = raiz.getIzq();
-            } else if (x > raiz.getDato()) {
+            } else if (x > raiz.getDato().getCedula()) {
                 raiz = raiz.getDer();
             } else {
                 return raiz.getDato();
@@ -266,7 +268,7 @@ public class AvlTree {
      * @return el dato buscado
      * @throws Estructuras.AVLTree.TreeException si hay errores al buscar
      */
-    public int buscar(int x) throws TreeException {
+    public Persona buscar(int x) throws TreeException {
         return buscarNodo(x, raiz);
     }
 
@@ -293,7 +295,7 @@ public class AvlTree {
      * @return el dato mínimo encontrado
      * @throws Estructuras.AVLTree.TreeException problemas al buscar el mínimo
      */
-    public int buscarMin() throws TreeException {
+    public Persona buscarMin() throws TreeException {
         return buscarmin(raiz).getDato();
     }
 
@@ -320,7 +322,7 @@ public class AvlTree {
      * @return el dato máximo encontrado
      * @throws Estructuras.AVLTree.TreeException problemas al buscar el mínimo
      */
-    public int buscarMax() throws TreeException {
+    public Persona buscarMax() throws TreeException {
         return buscarmax(raiz).getDato();
     }
 
@@ -348,13 +350,13 @@ public class AvlTree {
      * @param raiz recibe la raíz del árbol
      * @return el Nodo eliminado
      */
-    private Nodo eliminarNodo(int x, Nodo raiz) throws TreeException {
+    private Nodo eliminarNodo(Persona x, Nodo raiz) throws TreeException {
         if (raiz == null) {
             throw new TreeException("eliminar de árbol búsqueda, vacío");
         }
-        if (x < raiz.getDato()) {
+        if (x.getCedula() < raiz.getDato().getCedula()) {
             raiz.setIzq(eliminarNodo(x, raiz.getIzq()));
-        } else if (x > raiz.getDato()) {
+        } else if (x.getCedula() > raiz.getDato().getCedula()) {
             raiz.setDer(eliminarNodo(x, raiz.getDer()));
         } else if (raiz.getIzq() != null && raiz.getDer() != null) { // Dos hijos
             raiz.setDato(buscarmin(raiz.getDer()).getDato());
@@ -372,7 +374,7 @@ public class AvlTree {
      * @param x recibe el valor del dato a eliminar
      * @throws Estructuras.AVLTree.TreeException si hay problemas al eliminar
      */
-    public void eliminar(int x) throws TreeException {
+    public void eliminar(Persona x) throws TreeException {
         raiz = eliminarNodo(x, raiz);
     }
 

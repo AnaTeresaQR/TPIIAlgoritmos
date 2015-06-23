@@ -151,20 +151,6 @@ public class SolveFile {
     }
 
     /**
-     * Metodo que se encarga de extraer de la lista las cédulas de las personas
-     * y asignarlas a un vector
-     *
-     * @return devuelve un vector de cédulas
-     */
-    public int[] getIDArray() {
-        int[] v = new int[size];
-        for (int i = 0; i < v.length; i++) {
-            v[i] = vector[i].getCedula();
-        }
-        return v;
-    }
-
-    /**
      * Obtener un vector de personas
      *
      * @return vector de personas

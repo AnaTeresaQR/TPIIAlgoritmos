@@ -177,7 +177,7 @@ public class Dibujar {
      * @param linea la ubicación en y para colocarse
      */
     public void dibujarBandera(Graphics g, int x, int linea) {
-        g.fillOval(x + 16, linea,15, 15);
+        g.fillOval(x + 16, linea, 15, 15);
     }
 
 //    public void dibujarCirc(Graphics g, int x) {
