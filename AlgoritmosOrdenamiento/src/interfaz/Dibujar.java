@@ -18,13 +18,13 @@ public class Dibujar {
     public static final int TERCERA_LINEA = 340;
     public static final int CUARTA_LINEA = 450;
     // entre linea cero y uno
-    public final int linea0_1 = (PRIMERA_LINEA) / 2;
+    public final int LINEA0_1 = (PRIMERA_LINEA) / 2;
     // entre linea uno y dos
-    public final int linea1_2 = (PRIMERA_LINEA + SEGUNDA_LINEA) / 2;
+    public final int LINEA1_2 = (PRIMERA_LINEA + SEGUNDA_LINEA) / 2;
     // entre linea dos y tres
-    public final int linea2_3 = (SEGUNDA_LINEA + TERCERA_LINEA) / 2;
+    public final int LINEA2_3 = (SEGUNDA_LINEA + TERCERA_LINEA) / 2;
     // entre tres y cuatro
-    public final int linea3_4 = (TERCERA_LINEA + CUARTA_LINEA) / 2;
+    public final int LINEA3_4 = (TERCERA_LINEA + CUARTA_LINEA) / 2;
 
     /**
      * Se encarga de pintar un círculo que contendrá vectores, y validar si
@@ -164,12 +164,12 @@ public class Dibujar {
     }
 
     public void dibujarCirc(Graphics g, int x) {
-        g.drawOval(x, linea0_1, 40, 40);
+        g.drawOval(x, LINEA0_1, 40, 40);
 
-        g.drawOval(x, linea1_2, 40, 40);
+        g.drawOval(x, LINEA1_2, 40, 40);
 
-        g.drawOval(x, linea2_3, 40, 40);
+        g.drawOval(x, LINEA2_3, 40, 40);
 
-        g.drawOval(x, linea3_4, 40, 40);
+        g.drawOval(x, LINEA3_4, 40, 40);
     }
 }
