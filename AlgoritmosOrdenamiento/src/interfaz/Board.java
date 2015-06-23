@@ -30,9 +30,7 @@ public class Board extends JPanel {
     public void paint(Graphics g) {
         this.paintComponent(g);
         dibujar.dibujarVector(g, vector, new int[]{7, 2, 5}, Dibujar.PRIMERA_LINEA);
-        dibujar.dibujarVector(g, vector2, new int[]{7, 2, 5}, Dibujar.SEGUNDA_LINEA);
-        dibujar.dibujarVector(g, vector3, new int[]{7, 2, 5}, Dibujar.TERCERA_LINEA);
-        dibujar.dibujarVector(g, vector4, new int[]{7, 2, 5}, Dibujar.CUARTA_LINEA);
+        dibujar.dibujarVectorBandera(g, 9, vector, Dibujar.TERCERA_LINEA);
     }
 
     /**

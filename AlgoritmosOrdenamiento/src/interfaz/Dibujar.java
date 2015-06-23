@@ -109,7 +109,7 @@ public class Dibujar {
             }
             dibujarCirculo(g, numero, i * 50 + 40, linea, resaltado);
             dibujarIndices(g, i, i * 50 + 40, linea);
-            dibujarCirc(g, i * 50 + 50);
+//            dibujarCirc(g, i * 50 + 50);
         }
     }
 
@@ -122,7 +122,6 @@ public class Dibujar {
      * @param linea, la linea donde ubicaremos el arreglo
      */
     public void dibujarVector(Graphics g, int[] numeros, int linea) {
-        int index = 0;
         for (int i = 0; i < numeros.length; i++) {
             int numero = numeros[i];
             dibujarCirculo(g, numero, i * 50 + 40, linea, false);
@@ -131,12 +130,31 @@ public class Dibujar {
         }
     }
 
-    public void dibujarVectorBandera(Graphics g, int[] numeros, int linea) {
-
+    public void dibujarVectorBandera(Graphics g, int indiceBandera, int[] numeros, int linea) {
+        int lineaBandera = identificarLinea(linea);
+        for (int i = 0; i < numeros.length; i++) {
+            int numero = numeros[i];
+            dibujarCirculo(g, numero, i * 50 + 40, linea, false);
+            dibujarIndices(g, i, i * 50 + 40, linea);
+            if (i == indiceBandera - 1) {
+                dibujarBandera(g, i * 50 + 40, lineaBandera);
+            }
+        }
     }
 
-    public void identificarLinea() {
-
+    public int identificarLinea(int linea) {
+        switch (linea) {
+            case PRIMERA_LINEA:
+                return LINEA0_1;
+            case SEGUNDA_LINEA:
+                return LINEA1_2;
+            case TERCERA_LINEA:
+                return LINEA2_3;
+            case CUARTA_LINEA:
+                return LINEA3_4;
+            default:
+                throw new AssertionError("Linea Incorrecta");
+        }
     }
 
     /**
@@ -155,21 +173,20 @@ public class Dibujar {
      * Se encarga de dibujar los índices de los círculos
      *
      * @param g componente para pintar
-     * @param num a graficar
      * @param x coordenada de la x
      * @param linea la ubicación en y para colocarse
      */
-    public void dibujarBandera(Graphics g, int num, int x, int linea) {
-        g.drawString(String.valueOf(num), x + 16, linea);
+    public void dibujarBandera(Graphics g, int x, int linea) {
+        g.fillOval(x + 16, linea,15, 15);
     }
 
-    public void dibujarCirc(Graphics g, int x) {
-        g.drawOval(x, LINEA0_1, 40, 40);
-
-        g.drawOval(x, LINEA1_2, 40, 40);
-
-        g.drawOval(x, LINEA2_3, 40, 40);
-
-        g.drawOval(x, LINEA3_4, 40, 40);
-    }
+//    public void dibujarCirc(Graphics g, int x) {
+//        g.drawOval(x, LINEA0_1, 40, 40);
+//
+//        g.drawOval(x, LINEA1_2, 40, 40);
+//
+//        g.drawOval(x, LINEA2_3, 40, 40);
+//
+//        g.drawOval(x, LINEA3_4, 40, 40);
+//    }
 }
