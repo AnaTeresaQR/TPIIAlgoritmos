@@ -18,13 +18,16 @@ public class Dibujar {
     public static final int TERCERA_LINEA = 340;
     public static final int CUARTA_LINEA = 450;
     // entre linea cero y uno
-    public final int LINEA0_1 = (PRIMERA_LINEA) / 2;
+    public static final int LINEA0_1 = (PRIMERA_LINEA) / 2;
     // entre linea uno y dos
-    public final int LINEA1_2 = (PRIMERA_LINEA + SEGUNDA_LINEA) / 2;
+    public static final int LINEA1_2 = (PRIMERA_LINEA + SEGUNDA_LINEA) / 2;
     // entre linea dos y tres
-    public final int LINEA2_3 = (SEGUNDA_LINEA + TERCERA_LINEA) / 2;
+    public static final int LINEA2_3 = (SEGUNDA_LINEA + TERCERA_LINEA) / 2;
     // entre tres y cuatro
-    public final int LINEA3_4 = (TERCERA_LINEA + CUARTA_LINEA) / 2;
+    public static final int LINEA3_4 = (TERCERA_LINEA + CUARTA_LINEA) / 2;
+
+    public static final int[] LINEAS = {PRIMERA_LINEA, SEGUNDA_LINEA, TERCERA_LINEA, CUARTA_LINEA};
+    public static final int[] ENTRELINEAS = {LINEA0_1, LINEA1_2, LINEA2_3, LINEA3_4};
 
     /**
      * Se encarga de pintar un círculo que contendrá vectores, y validar si
@@ -42,8 +45,8 @@ public class Dibujar {
         } else {
             g.setColor(Color.black);
         }
-        g.drawOval(x, y, 40, 40);
-        g.drawString(String.valueOf(numero), x + 14, y + 25);
+        g.drawOval(x, y, 30, 30);
+        g.drawString(String.valueOf(numero), x + 9, y + 23);
     }
 
     /**
@@ -98,7 +101,7 @@ public class Dibujar {
         for (int i = 0; i < numeros.length; i++) {
             int numero = numeros[i];
             if (index < indexColoreados.length) {
-                if (i == indexColoreados[index] - 1) {
+                if (i == indexColoreados[index]) {
                     resaltado = true;
                     index++;
                 } else {
@@ -130,13 +133,21 @@ public class Dibujar {
         }
     }
 
+    public void vectorDer(Graphics g, int[] numeros, int x, int linea) {
+        for (int i = 0; i < numeros.length; i++) {
+            int numero = numeros[i];
+            dibujarCirculo(g, numero, i * 50 + x + 40, linea, false);
+            dibujarIndices(g, i, i * 50 + x + 40, linea);
+        }
+    }
+
     public void dibujarVectorBandera(Graphics g, int indiceBandera, int[] numeros, int linea) {
         int lineaBandera = identificarLinea(linea);
         for (int i = 0; i < numeros.length; i++) {
             int numero = numeros[i];
             dibujarCirculo(g, numero, i * 50 + 40, linea, false);
             dibujarIndices(g, i, i * 50 + 40, linea);
-            if (i == indiceBandera - 1) {
+            if (i == indiceBandera) {
                 dibujarBandera(g, i * 50 + 40, lineaBandera);
             }
         }
@@ -155,6 +166,18 @@ public class Dibujar {
             default:
                 throw new AssertionError("Linea Incorrecta");
         }
+    }
+
+    static int index = 0;
+
+    public int getIndex() {
+
+        if (index >= Dibujar.LINEAS.length - 1) {
+            index = 0;
+        } else {
+            index++;
+        }
+        return index;
     }
 
     /**
