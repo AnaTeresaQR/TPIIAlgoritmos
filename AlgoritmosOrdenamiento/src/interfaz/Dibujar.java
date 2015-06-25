@@ -168,8 +168,10 @@ public class Dibujar {
         }
     }
 
-    public void vectorDer(Graphics g, int[] numeros, int[] coloreados, int x, int linea, ) {
-    }
+//    public void vectorDer(Graphics g, int[] numeros, int[] coloreados, int x, int linea, ) {
+//        
+//        
+//    }
 
     public void dibujarVectorBandera(Graphics g, int indiceBandera, int[] numeros, int linea) {
         int lineaBandera = identificarEntreLinea(linea);
