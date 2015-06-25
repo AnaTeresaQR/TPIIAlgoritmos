@@ -28,8 +28,6 @@ public class Board extends JPanel implements Runnable {
         {24},
         {27},
         {8, 10, 11, 12, 14, 17, 19, 22, 24, 27}};
-    
-    
 
     int row;
     int index;
@@ -44,30 +42,14 @@ public class Board extends JPanel implements Runnable {
      * Se encarga de pintar en el JFrame
      */
     @Override
-    public void paint(Graphics g) {
-        this.paintComponent(g);
-        dibujar.dibujarVector(g, matriz[row], Dibujar.LINEAS[index]);
-    }
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        dibujar.mostrarMsj(g, "Vector a ordenar", Dibujar.LINEA0_1);
+        dibujar.dibujarVector(g, matriz[0], new int[]{5}, Dibujar.PRIMERA_LINEA);
+        dibujar.mostrarMsj(g, "Se selecciona la mitad menor a 17 y la mayor a la derecha", Dibujar.LINEA1_2);
+        dibujar.dibujarVector(g, matriz[1], new int[]{2}, Dibujar.SEGUNDA_LINEA);
+        dibujar.vectorDer(g, matriz[2], this.getWidth() / 2, Dibujar.TERCERA_LINEA);
 
-    public void pintarQuick(Graphics g) {
-        try {
-            int[] v1 = matriz[0];
-            int[] v2 = matriz[1];
-            int[] v3 = matriz[2];
-            int[] v4 = matriz[3];
-            dibujar.dibujarVector(g, v1, new int[]{6}, Dibujar.PRIMERA_LINEA);
-            repaint();
-            dibujar.dibujarVector(g, v2, new int[]{3, 7}, Dibujar.SEGUNDA_LINEA);
-            repaint();
-            dibujar.dibujarVector(g, v3, new int[]{2, 7}, Dibujar.TERCERA_LINEA);
-            Thread.sleep(3000);
-            repaint();
-            dibujar.dibujarVector(g, v4, new int[]{1, 2}, Dibujar.CUARTA_LINEA);
-            repaint();
-
-        } catch (InterruptedException ex) {
-            System.out.println("");
-        }
     }
 
     @Override
@@ -76,8 +58,6 @@ public class Board extends JPanel implements Runnable {
             try {
                 repaint();
                 Thread.sleep(3000);
-                row++;
-                index = dibujar.getIndex();
 
             } catch (InterruptedException ex) {
                 System.out.println("");
@@ -107,5 +87,6 @@ public class Board extends JPanel implements Runnable {
 //        hilo.start();
 
     }
-
+//Graphics2D g2d = (Graphics2D) g;
+    //     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 }
